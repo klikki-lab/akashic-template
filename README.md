@@ -14,5 +14,9 @@ https://akashic-games.github.io/
 ただし、音声ファイルについては以下のページをご覧ください。
 
 ### akashic commands
-akashic init -t github:klikki-lab/akashic-template
-akashic export zip --output game.zip --nicolive  
+- githubからテンプレートをクローン  
+`akashic config set init.github.protocol ssh`
+`akashic init -t github:klikki-lab/akashic-template`  
+
+- ニコ生ゲーム
+`akashic export zip --output game.zip --nicolive`  
