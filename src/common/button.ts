@@ -1,5 +1,3 @@
-import { PointUpEvent } from "@akashic/akashic-engine";
-
 export class Button extends g.Sprite {
 
     private _onPressed?: (button: Button) => void;
@@ -51,7 +49,7 @@ export class Button extends g.Sprite {
         }
     }
 
-    private pointUpHandler(_ev: PointUpEvent) {
+    private pointUpHandler(_ev: g.PointUpEvent) {
         if (!this.isPressed) return;
 
         this.switchPressedState(false);
