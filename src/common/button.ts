@@ -1,3 +1,5 @@
+import { PointUpEvent } from "@akashic/akashic-engine";
+
 export class Button extends g.Sprite {
 
     private _onPressed?: (button: Button) => void;
@@ -14,43 +16,47 @@ export class Button extends g.Sprite {
             touchable: true,
         });
 
-        this.onPointDown.add((_ev: g.PointDownEvent): void => {
-            if (this.isPressed) return;
-
-            this.switchPressedState(true);
-            this._onPressed?.(this);
-        });
-
-        this.onPointMove.add((ev: g.PointMoveEvent): void => {
-            if (!this.isPressed) return;
-
-            const ex = ev.point.x + ev.startDelta.x;
-            const ey = ev.point.y + ev.startDelta.y;
-            if (ex < 0 || ex > this.width || ey < 0 || ey > this.height) {
-                this.switchPressedState(false);
-            }
-        });
-
-        this.onPointUp.add((_ev: g.PointUpEvent): void => {
-            if (!this.isPressed) return;
-
-            this.switchPressedState(false);
-            this._onClick?.(this);
-        });
+        this.onPointDown.add(this.pointDownHandler);
+        this.onPointMove.add(this.pointMoveHandler);
+        this.onPointUp.add(this.pointUpHandler);
     }
 
     removeAllListener(): void {
         if (this.isPressed) {
             this.switchPressedState(false);
         }
-        this.onPointDown.removeAll();
-        this.onPointMove.removeAll();
-        this.onPointUp.removeAll();
+        this.onPointDown.remove(this.pointDownHandler);
+        this.onPointMove.remove(this.pointMoveHandler);
+        this.onPointUp.remove(this.pointUpHandler);
     }
 
     set onPressed(listener: (button: Button) => void) { this._onPressed = listener; };
 
     set onClick(listener: (button: Button) => void) { this._onClick = listener; };
+
+    private pointDownHandler(_ev: g.PointDownEvent): void {
+        if (this.isPressed) return;
+
+        this.switchPressedState(true);
+        this._onPressed?.(this);
+    }
+
+    private pointMoveHandler(ev: g.PointMoveEvent): void {
+        if (!this.isPressed) return;
+
+        const ex = ev.point.x + ev.startDelta.x;
+        const ey = ev.point.y + ev.startDelta.y;
+        if (ex < 0 || ex > this.width || ey < 0 || ey > this.height) {
+            this.switchPressedState(false);
+        }
+    }
+
+    private pointUpHandler(_ev: PointUpEvent) {
+        if (!this.isPressed) return;
+
+        this.switchPressedState(false);
+        this._onClick?.(this);
+    }
 
     private switchPressedState(isPressed: boolean): void {
         this.isPressed = isPressed;
