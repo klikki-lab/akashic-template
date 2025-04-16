@@ -33,7 +33,7 @@ export class GameScene extends BaseScene<void> {
         }
     };
 
-    private createCountdownTimer = (timeLimit: number): CountdownTimer => {
+    private createCountdownTimer(timeLimit: number): CountdownTimer {
         const countdownTimer = new CountdownTimer(timeLimit);
         countdownTimer.onTick = remainingSec => {
 
@@ -43,11 +43,11 @@ export class GameScene extends BaseScene<void> {
             this.isFinish = true;
         };
         return countdownTimer;
-    };
+    }
 
-    private createAudioController = (musicVolume: number, soundVolume: number, disable: boolean): AudioController => {
+    private createAudioController(musicVolume: number, soundVolume: number, disable: boolean): AudioController {
         const audioController = new AudioController(musicVolume, soundVolume, disable);
 
         return audioController;
-    };
+    }
 }
