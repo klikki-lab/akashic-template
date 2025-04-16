@@ -1,3 +1,4 @@
+import { AudioController } from "../common/audioController";
 import { BaseScene } from "../common/baseScene";
 import { CountdownTimer } from "../common/countdownTimer";
 import { GameMainParameterObject } from "./../parameterObject";
@@ -5,6 +6,7 @@ import { GameMainParameterObject } from "./../parameterObject";
 export class GameScene extends BaseScene<void> {
 
     private countdownTimer: CountdownTimer;
+    private audioController: AudioController;
 
     private isFinish = true;
 
@@ -21,6 +23,7 @@ export class GameScene extends BaseScene<void> {
 
     private loadHandler = (timeLimit: number): void => {
         this.countdownTimer = this.createCountdownTimer(timeLimit);
+        this.audioController = this.createAudioController();
     };
 
     private updateHandler = (): void | boolean => {
@@ -40,5 +43,11 @@ export class GameScene extends BaseScene<void> {
             this.isFinish = true;
         };
         return countdownTimer;
+    };
+
+    private createAudioController = (): AudioController => {
+        const audioController = new AudioController(0.2, 0.2, false);
+
+        return audioController;
     };
 }
