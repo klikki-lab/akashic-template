@@ -10,7 +10,7 @@ export class GameScene extends BaseScene<void> {
 
     private isFinish = true;
 
-    constructor(param: GameMainParameterObject, timeLimit: number) {
+    constructor(param: GameMainParameterObject, isTouched: boolean, timeLimit: number) {
         super({
             game: g.game,
             assetIds: [
@@ -18,12 +18,12 @@ export class GameScene extends BaseScene<void> {
             ],
         });
 
-        this.onLoad.add(() => this.loadHandler(timeLimit));
+        this.onLoad.add(() => this.loadHandler(isTouched, timeLimit));
     }
 
-    private loadHandler = (timeLimit: number): void => {
+    private loadHandler = (isTouched: boolean, timeLimit: number): void => {
         this.countdownTimer = this.createCountdownTimer(timeLimit);
-        this.audioController = this.createAudioController();
+        this.audioController = this.createAudioController(0.2, 0.2, !isTouched);
     };
 
     private updateHandler = (): void | boolean => {
@@ -45,8 +45,8 @@ export class GameScene extends BaseScene<void> {
         return countdownTimer;
     };
 
-    private createAudioController = (): AudioController => {
-        const audioController = new AudioController(0.2, 0.2, false);
+    private createAudioController = (musicVolume: number, soundVolume: number, disable: boolean): AudioController => {
+        const audioController = new AudioController(musicVolume, soundVolume, disable);
 
         return audioController;
     };
