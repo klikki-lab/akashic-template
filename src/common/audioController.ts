@@ -59,7 +59,7 @@ export class AudioController {
      * @param asset AssetAccessor (=> {@link g.AssetAccessor})
      * @param params BGMパラメータ (=>{@link MusicParam})。アセットIDとボリュームを指定する。ボリューム指定がなければコンストラクタのデフォルト値になる。
      */
-    addMusic = (asset: g.AssetAccessor, ...params: MusicParam[]): void => {
+    addMusic(asset: g.AssetAccessor, ...params: MusicParam[]): void {
         for (const param of params) {
             const musicAudioSystem = new g.MusicAudioSystem({
                 id: param.assetId,
@@ -77,7 +77,7 @@ export class AudioController {
                 context: audioPlayContext,
             };
         }
-    };
+    }
 
     /**
      * 指定したアセットIDのBGMを再生する。
@@ -85,18 +85,20 @@ export class AudioController {
      * @returns AudioPlayContext (=> {@link g.AudioPlayContext})
      * @throws 指定したアセットIDが未追加の場合
      */
-    playMusic = (assetId: string): g.AudioPlayContext => {
+    playMusic(assetId: string): g.AudioPlayContext {
         const context = this.getAudioPlayContext(assetId);
         context.play();
         return context;
-    };
+    }
 
     /**
      * 指定したアセットIDのBGMを停止させる。
      * @param assetId アセットID
      * @throws 指定したアセットIDが未追加の場合
      */
-    stopMusic = (assetId: string): void => this.getAudioPlayContext(assetId).stop();
+    stopMusic(assetId: string): void {
+        this.getAudioPlayContext(assetId).stop();
+    }
 
     /**
      * 指定したアセットIDのBGMのボリュームを取得する。
@@ -104,7 +106,9 @@ export class AudioController {
      * @returns ボリューム
      * @throws 指定したアセットIDが未追加の場合
      */
-    getMusicVolume = (assetId: string): number => this.getAudioPlayContext(assetId).volume;
+    getMusicVolume(assetId: string): number {
+        return this.getAudioPlayContext(assetId).volume;
+    }
 
     // イージング関数例
     // const volume = this.audioController.getMusicVolume(MusicId.BGM);
@@ -124,8 +128,9 @@ export class AudioController {
      * @returns AudioTransitionContext (=> {@link g.AudioTransitionContext})
      * @throws 指定したアセットIDが未追加の場合
      */
-    fadeOutMusic = (assetId: string, duration: number, easing?: g.EasingFunction): g.AudioTransitionContext =>
-        g.AudioUtil.fadeOut(g.game, this.getAudioPlayContext(assetId), duration, easing);
+    fadeOutMusic(assetId: string, duration: number, easing?: g.EasingFunction): g.AudioTransitionContext {
+        return g.AudioUtil.fadeOut(g.game, this.getAudioPlayContext(assetId), duration, easing);
+    }
 
     /**
      * 指定したアセットIDのBGMをフェードインさせる。
@@ -135,15 +140,16 @@ export class AudioController {
      * @param easing イージング関数。省略時は linear が指定される。
      * @returns AudioTransitionContext (=> {@link g.AudioTransitionContext})
      */
-    fadeInMusic = (assetId: string, duration: number, to: number = 1, easing?: g.EasingFunction): g.AudioTransitionContext =>
-        g.AudioUtil.fadeIn(g.game, this.getAudioPlayContext(assetId), duration, Math.max(0, Math.min(to, 1)), easing);
+    fadeInMusic(assetId: string, duration: number, to: number = 1, easing?: g.EasingFunction): g.AudioTransitionContext {
+        return g.AudioUtil.fadeIn(g.game, this.getAudioPlayContext(assetId), duration, Math.max(0, Math.min(to, 1)), easing);
+    }
 
     /**
      * SEを追加する。
      * @param asset AssetAccessor　(=> {@link g.AssetAccessor})
      * @param params SEパラメータ (=>{@link SoundParam})。アセットIDとボリューム、インターバルを指定する。ボリューム指定がなければコンストラクタのデフォルト値に、インターバル指定がなければ 1 が指定される。
      */
-    addSound = (asset: g.AssetAccessor, ...params: SoundParam[]): void => {
+    addSound(asset: g.AssetAccessor, ...params: SoundParam[]): void {
         for (const param of params) {
             const interval = param.interval ?? AudioController.DEFAULT_SOUND_INTERVAL;
             this.sounds[param.assetId] = {
@@ -153,7 +159,7 @@ export class AudioController {
                 age: g.game.age,
             };
         }
-    };
+    }
 
     /**
      * 指定したアセットIDのSEを再生する。
@@ -161,7 +167,7 @@ export class AudioController {
      * @returns SEが再生できれば `g.AudioPlayer`、SEの再生が無効化されているかインターバル値以下で再生を行おうとした場合 `undefined` が返る。
      * @throws 指定したアセットIDが未追加の場合
      */
-    playSound = (assetId: string): (g.AudioPlayer | undefined) => {
+    playSound(assetId: string): (g.AudioPlayer | undefined) {
         if (this._disableSound) return undefined;
 
         const props = this.getSoundProps(assetId);
@@ -174,7 +180,7 @@ export class AudioController {
         const player = props.audio.play();
         player.changeVolume(props.volume);
         return player;
-    };
+    }
 
     /**
      * 指定したアセットIDのSEのボリュームを取得する。
@@ -182,29 +188,35 @@ export class AudioController {
      * @returns ボリューム。
      * @throws 指定したアセットIDが未追加の場合。
      */
-    getSoundVolume = (assetId: string): number => this.getSoundProps(assetId).volume;
+    getSoundVolume(assetId: string): number {
+        return this.getSoundProps(assetId).volume;
+    }
 
     /**
      * SEの再生を有効にする。
      */
-    enablePlaySound = (): void => { this._disableSound = false; }
+    enablePlaySound(): void {
+        this._disableSound = false;
+    }
 
     /**
      * SEの再生が無効なら `true`、そうでなければ `false`。
      */
     get disablePlaySound(): boolean { return this._disableSound; }
 
-    private clamp = (value: number): number => g.Util.clamp(value, 0, 1);
+    private clamp(value: number): number {
+        return g.Util.clamp(value, 0, 1);
+    }
 
-    private getAudioPlayContext = (assetId: string): g.AudioPlayContext => {
+    private getAudioPlayContext(assetId: string): g.AudioPlayContext {
         const context = this.musics[assetId]?.context;
         if (!context) throw new Error(`${assetId} doesn't exist.`);
         return context;
-    };
+    }
 
-    private getSoundProps = (assetId: string): SoundProps => {
+    private getSoundProps(assetId: string): SoundProps {
         const soundProps = this.sounds[assetId];
         if (!soundProps) throw new Error(`${assetId} doesn't exist.`);
         return soundProps;
-    };
+    }
 }
