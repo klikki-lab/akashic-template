@@ -39,22 +39,22 @@ export class Button extends g.Sprite {
         });
     }
 
-    removeAllListener = (): void => {
+    removeAllListener(): void {
         if (this.isPressed) {
             this.switchPressedState(false);
         }
         this.onPointDown.removeAll();
         this.onPointMove.removeAll();
         this.onPointUp.removeAll();
-    };
+    }
 
     set onPressed(listener: (button: Button) => void) { this._onPressed = listener; };
 
     set onClick(listener: (button: Button) => void) { this._onClick = listener; };
 
-    private switchPressedState = (isPressed: boolean): void => {
+    private switchPressedState(isPressed: boolean): void {
         this.isPressed = isPressed;
         this.srcX = isPressed ? this.width : 0;
         this.invalidate();
-    };
+    }
 }

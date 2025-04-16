@@ -10,7 +10,7 @@ export abstract class BaseScene<T> extends g.Scene {
     /**
     * 開発中に右クリックでスクリーンショットできるようにする。この処理を有効にするにはtsconfigにdomを追加すること。
     */
-    enableRightClickScreenshot = (): void => {
+    enableRightClickScreenshot(): void {
         this.onPointDownCapture.add(ev => {
             if (ev.button === 2) {
                 const link = document.getElementsByClassName("pure-button")[2];

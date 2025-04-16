@@ -15,7 +15,7 @@ export class CountdownTimer {
     /**
      * 毎フレーム呼び出すアップデートメソッド。
      */
-    update = (): void => {
+    update(): void {
         if (this.isStopped) return;
 
         this._remainingTime -= 1 / g.game.fps;
@@ -28,29 +28,29 @@ export class CountdownTimer {
                 this._onFinish?.();
             }
         }
-    };
+    }
 
     /**
      * カウントダウンを停止する。
      * @returns カウントダウン中であれば `true`、そうでなければ `false`
      */
-    stop = (): boolean => {
+    stop(): boolean {
         if (!this.isStopped) {
             this.isStopped = true;
             return true;
         }
         return false;
-    };
+    }
 
     /**
      * @returns カウントダウンが終了していれば`true`、そうでなければ`false`。
      */
-    isFinish = (): boolean => this._remainingTime <= 0;
+    isFinish(): boolean { return this._remainingTime <= 0; }
 
     /** 
      * @returns 残り時間を切り上げた残り秒数を取得する。
      */
-    getRemainingSec = (): number => Math.ceil(this._remainingTime);
+    getRemainingSec(): number { return Math.ceil(this._remainingTime); }
 
     /**
      * @returns 残り時間を取得する。

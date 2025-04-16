@@ -11,7 +11,7 @@ export class CustomLoadingScene extends g.LoadingScene {
             assetIds: [],
             explicitEnd: true,
         });
-        
+
         this.onLoad.add(this.loadHandler);
     }
 
