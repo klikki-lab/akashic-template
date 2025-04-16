@@ -1,12 +1,14 @@
 import { AudioController } from "../common/audioController";
 import { BaseScene } from "../common/baseScene";
 import { CountdownTimer } from "../common/countdownTimer";
+import { Random } from "../common/random";
 import { GameMainParameterObject } from "./../parameterObject";
 
 export class GameScene extends BaseScene<void> {
 
-    private countdownTimer: CountdownTimer;
     private audioController: AudioController;
+    private countdownTimer: CountdownTimer;
+    private random: Random;
 
     private isFinish = true;
 
@@ -18,6 +20,8 @@ export class GameScene extends BaseScene<void> {
             ],
         });
 
+        this.random = new Random(param.random || g.game.random);
+        
         this.onLoad.add(() => this.loadHandler(isTouched, timeLimit));
     }
 
