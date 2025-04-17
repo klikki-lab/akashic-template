@@ -45,7 +45,7 @@ export class CountdownTimer {
     /**
      * @returns カウントダウンが終了していれば`true`、そうでなければ`false`。
      */
-    isFinish(): boolean { return this._remainingTime <= 0; }
+    isFinished(): boolean { return this._remainingTime <= 0; }
 
     /** 
      * @returns 残り時間を切り上げた残り秒数を取得する。
