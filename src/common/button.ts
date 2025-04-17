@@ -1,8 +1,12 @@
+/**
+ * イメージボタンクラス。{@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのリスナーがある。
+ */
 export class Button extends g.Sprite {
 
     private _onPress?: (button: Button) => void;
-    private _onPressCancelled: (button: Button) => void;
+    private _onPressCancelled?: (button: Button) => void;
     private _onClick?: (button: Button) => void;
+
     private isPressed: boolean = false;
 
     constructor(scene: g.Scene, assetId: string) {
