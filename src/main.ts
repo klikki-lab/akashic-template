@@ -1,6 +1,7 @@
 import { CustomLoadingScene } from "./common/customLoadingScene";
 import { GameScene } from "./game_scene/gameScene";
 import { GameMainParameterObject } from "./parameterObject";
+import { TitleScene } from "./title_scene/titleScene";
 
 export function main(param: GameMainParameterObject): void {
     g.game.vars.gameState = {
@@ -10,5 +11,11 @@ export function main(param: GameMainParameterObject): void {
     };
     g.game.loadingScene = new CustomLoadingScene();
 
-    g.game.pushScene(new GameScene(param, false, 60));
+    // const titleScene = new TitleScene(param, 10);
+    // titleScene.onFinish = isTouched => {
+    //     g.game.replaceScene(new GameScene(param, isTouched, 60));
+    // }
+    // g.game.pushScene(titleScene);
+
+    g.game.pushScene(new GameScene(param, true, 60));
 }
