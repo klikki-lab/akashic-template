@@ -1,6 +1,6 @@
 /**
- * 最低限の機能のみを提供するイメージボタンクラス。画像は通常時と押下時の画像を横並びにしておく。
- * {@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのリスナーがある。
+ * 最低限の機能を提供するイメージボタンクラス。画像は通常時と押下時の画像を横並びにしておく。
+ * {@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのイベントリスナーがある。
  */
 export class Button extends g.Sprite {
 
@@ -35,20 +35,22 @@ export class Button extends g.Sprite {
     }
 
     /**
-     * ボタンが押された時のリスナーをセットする。この時点ではまだクリックしたことにはならない。
-     * @param listener 押下リスナー。
+     * ボタンが押された時のイベントリスナーをセットする。
+     * この時点ではまだクリックしたことにはならない。
+     * @param listener 押下イベントリスナー。
      */
     set onPress(listener: (button: Button) => void) { this._onPress = listener; };
 
     /**
-     * ボタンを押下後、ボタンからポインタが離れた時のリスナーをセットする。このリスナーが呼び出された時点でボタンのクリックはキャンセルされる。
-     * @param listener キャンセルリスナー。
+     * ボタン押下状態を維持したままボタンの領域からポインタが離れた時のイベントリスナーをセットする。
+     * このイベントリスナーが呼び出されるとクリック判定は行われない。
+     * @param listener キャンセルイベントリスナー。
      */
     set onPressCancelled(listener: (button: Button) => void) { this._onPressCancelled = listener; };
 
     /**
-     * ボタンがクリックされた時のリスナーをセットする。
-     * @param listener クリックリスナー。
+     * ボタンがクリックされた時のイベントリスナーをセットする。
+     * @param listener クリックイベントリスナー。
      */
     set onClick(listener: (button: Button) => void) { this._onClick = listener; };
 
