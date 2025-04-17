@@ -1,6 +1,7 @@
 export class Button extends g.Sprite {
 
     private _onPressed?: (button: Button) => void;
+    private _onPressCancelled: (button: Button) => void;
     private _onClick?: (button: Button) => void;
     private isPressed: boolean = false;
 
@@ -30,6 +31,8 @@ export class Button extends g.Sprite {
 
     set onPressed(listener: (button: Button) => void) { this._onPressed = listener; };
 
+    set onPresseCancelled(listener: (button: Button) => void) { this._onPressCancelled = listener; };
+
     set onClick(listener: (button: Button) => void) { this._onClick = listener; };
 
     private pointDownHandler(_ev: g.PointDownEvent): void {
@@ -46,6 +49,7 @@ export class Button extends g.Sprite {
         const ey = ev.point.y + ev.startDelta.y;
         if (ex < 0 || ex > this.width || ey < 0 || ey > this.height) {
             this.switchPressedState(false);
+            this._onPressCancelled?.(this);
         }
     }
 
