@@ -10,6 +10,5 @@ export function main(param: GameMainParameterObject): void {
     };
     g.game.loadingScene = new CustomLoadingScene();
 
-    const totalTimeLimit = param.sessionParameter.totalTimeLimit || 65;
     g.game.pushScene(new GameScene(param, false, 60));
 }
