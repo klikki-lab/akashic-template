@@ -1,5 +1,6 @@
 /**
- * イメージボタンクラス。{@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのリスナーがある。
+ * 最低限の機能のみを提供するイメージボタンクラス。画像は通常時と押下時の画像を横並びにしておく。
+ * {@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのリスナーがある。
  */
 export class Button extends g.Sprite {
 
