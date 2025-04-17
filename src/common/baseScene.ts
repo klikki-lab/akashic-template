@@ -5,7 +5,10 @@ export abstract class BaseScene<T> extends g.Scene {
 
     protected _onFinish?: (param: T) => void;
 
-    set onFinish(onFinish: (param: T) => void) { this._onFinish = onFinish; }
+    /**
+     * シーン終了のイベントコールバックをセットする。
+     */
+    set onFinish(callback: (param: T) => void) { this._onFinish = callback; }
 
     /**
     * 開発中に右クリックでスクリーンショットできるようにする。この処理を有効にするにはtsconfigにdomを追加すること。
