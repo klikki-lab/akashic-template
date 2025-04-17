@@ -200,7 +200,7 @@ export class AudioController {
     }
 
     /**
-     * SEの再生が無効なら `true`、そうでなければ `false`。
+     * @returns SEの再生が無効なら `true`、そうでなければ `false`。
      */
     get disablePlaySound(): boolean { return this._disableSound; }
 
