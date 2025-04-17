@@ -1,6 +1,6 @@
 export class Button extends g.Sprite {
 
-    private _onPressed?: (button: Button) => void;
+    private _onPress?: (button: Button) => void;
     private _onPressCancelled: (button: Button) => void;
     private _onClick?: (button: Button) => void;
     private isPressed: boolean = false;
@@ -29,17 +29,29 @@ export class Button extends g.Sprite {
         this.onPointUp.remove(this.pointUpHandler);
     }
 
-    set onPressed(listener: (button: Button) => void) { this._onPressed = listener; };
+    /**
+     * ボタンが押された時のリスナーをセットする。この時点ではまだクリックしたことにはならない。
+     * @param listener 押下リスナー。
+     */
+    set onPress(listener: (button: Button) => void) { this._onPress = listener; };
 
-    set onPresseCancelled(listener: (button: Button) => void) { this._onPressCancelled = listener; };
+    /**
+     * ボタンを押下後、ボタンからポインタが離れた時のリスナーをセットする。このリスナーが呼び出された時点でボタンのクリックはキャンセルされる。
+     * @param listener キャンセルリスナー。
+     */
+    set onPressCancelled(listener: (button: Button) => void) { this._onPressCancelled = listener; };
 
+    /**
+     * ボタンがクリックされた時のリスナーをセットする。
+     * @param listener クリックリスナー。
+     */
     set onClick(listener: (button: Button) => void) { this._onClick = listener; };
 
     private pointDownHandler(_ev: g.PointDownEvent): void {
         if (this.isPressed) return;
 
         this.switchPressedState(true);
-        this._onPressed?.(this);
+        this._onPress?.(this);
     }
 
     private pointMoveHandler(ev: g.PointMoveEvent): void {
