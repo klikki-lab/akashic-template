@@ -1,34 +1,34 @@
-import { EntityUtil } from "./entityUtil";
+import {  GeometryUtil } from "./geometryUtil";
 
 export class Sprite2D extends g.Sprite {
 
     /**　
      * @returns スケールを考慮した横幅。
      */
-    getScaledWidth(): number { return EntityUtil.getScaledWidth(this); }
+    getScaledWidth(): number { return  GeometryUtil.getScaledWidth(this); }
 
     /**
      * @returns スケールを考慮した縦幅。
      */
-    getScaledHeight(): number { return EntityUtil.getScaledHeight(this); }
+    getScaledHeight(): number { return  GeometryUtil.getScaledHeight(this); }
 
     /** 
      * @returns 上座標。
      */
-    getTop(): number { return EntityUtil.getTop(this); }
+    getTop(): number { return  GeometryUtil.getTop(this); }
 
     /**
      * @returns 右座標。
      */
-    getRight(): number { return EntityUtil.getRight(this); }
+    getRight(): number { return  GeometryUtil.getRight(this); }
 
     /**
      * @returns 下座標。
      */
-    getBottom(): number { return EntityUtil.getBottom(this); }
+    getBottom(): number { return  GeometryUtil.getBottom(this); }
 
     /**
      * @returns 左座標。
      */
-    getLeft(): number { return EntityUtil.getLeft(this); }
+    getLeft(): number { return  GeometryUtil.getLeft(this); }
 }
