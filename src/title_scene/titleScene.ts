@@ -1,5 +1,5 @@
-import { BaseScene } from "../common/baseScene";
-import { CountdownTimer } from "../common/countdownTimer";
+import { BaseScene } from "../common/scene/baseScene";
+import { CountdownTimer } from "../common/util/countdownTimer";
 import { GameMainParameterObject } from "./../parameterObject";
 
 export class TitleScene extends BaseScene<boolean> {

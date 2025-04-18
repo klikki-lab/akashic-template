@@ -1,8 +1,10 @@
+import { Sprite2D } from "../entity/sprite2D";
+
 /**
  * 最低限の機能を提供するイメージボタンクラス。画像は通常時と押下時の画像を横並びにしておく。
  * {@link onPress}、{@link onPressCancelled}、{@link onClick} 、3つのイベントリスナーがある。
  */
-export class Button extends g.Sprite {
+export class Button extends Sprite2D {
 
     private _onPress?: (button: Button) => void;
     private _onPressCancelled?: (button: Button) => void;
@@ -66,7 +68,7 @@ export class Button extends g.Sprite {
 
         const ex = ev.point.x + ev.startDelta.x;
         const ey = ev.point.y + ev.startDelta.y;
-        if (ex < 0 || ex > this.width || ey < 0 || ey > this.height) {
+        if (ex < 0 || ex > this.getScaledWidth() || ey < 0 || ey > this.getScaledHeight()) {
             this.switchPressedState(false);
             this._onPressCancelled?.(this);
         }

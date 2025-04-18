@@ -1,7 +1,7 @@
-import { AudioController } from "../common/audioController";
-import { BaseScene } from "../common/baseScene";
-import { CountdownTimer } from "../common/countdownTimer";
-import { Random } from "../common/random";
+import { AudioController } from "../common/util/audioController";
+import { BaseScene } from "../common/scene/baseScene";
+import { CountdownTimer } from "../common/util/countdownTimer";
+import { Random } from "../common/util/random";
 import { GameMainParameterObject } from "./../parameterObject";
 
 export class GameScene extends BaseScene<void> {
