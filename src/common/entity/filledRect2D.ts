@@ -1,4 +1,4 @@
-import { GeometryUtil } from "./geometryUtil";
+import * as GeometryUtil from "./geometryUtil";
 
 export class FilledRect2D extends g.FilledRect {
 
