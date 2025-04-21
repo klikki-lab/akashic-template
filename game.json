@@ -19,46 +19,6 @@
 			"path": "script/parameterObject.js",
 			"global": true
 		},
-		"audioController": {
-			"type": "script",
-			"path": "script/common/audioController.js",
-			"global": true
-		},
-		"baseScene": {
-			"type": "script",
-			"path": "script/common/baseScene.js",
-			"global": true
-		},
-		"button": {
-			"type": "script",
-			"path": "script/common/button.js",
-			"global": true
-		},
-		"countdownTimer": {
-			"type": "script",
-			"path": "script/common/countdownTimer.js",
-			"global": true
-		},
-		"customLoadingScene": {
-			"type": "script",
-			"path": "script/common/customLoadingScene.js",
-			"global": true
-		},
-		"entity2D": {
-			"type": "script",
-			"path": "script/common/entity2D.js",
-			"global": true
-		},
-		"mathUitl": {
-			"type": "script",
-			"path": "script/common/mathUitl.js",
-			"global": true
-		},
-		"windowUtil": {
-			"type": "script",
-			"path": "script/common/windowUtil.js",
-			"global": true
-		},
 		"gameScene": {
 			"type": "script",
 			"path": "script/game_scene/gameScene.js",
@@ -67,6 +27,76 @@
 		"titleScene": {
 			"type": "script",
 			"path": "script/title_scene/titleScene.js",
+			"global": true
+		},
+		"filledRect2D": {
+			"type": "script",
+			"path": "script/common/entity/filledRect2D.js",
+			"global": true
+		},
+		"geometryUtil": {
+			"type": "script",
+			"path": "script/common/entity/geometryUtil.js",
+			"global": true
+		},
+		"sprite2D": {
+			"type": "script",
+			"path": "script/common/entity/sprite2D.js",
+			"global": true
+		},
+		"imageButton": {
+			"type": "script",
+			"path": "script/common/gui/imageButton.js",
+			"global": true
+		},
+		"baseScene": {
+			"type": "script",
+			"path": "script/common/scene/baseScene.js",
+			"global": true
+		},
+		"customLoadingScene": {
+			"type": "script",
+			"path": "script/common/scene/customLoadingScene.js",
+			"global": true
+		},
+		"audioController": {
+			"type": "script",
+			"path": "script/common/util/audioController.js",
+			"global": true
+		},
+		"countdownTimer": {
+			"type": "script",
+			"path": "script/common/util/countdownTimer.js",
+			"global": true
+		},
+		"mathUtil": {
+			"type": "script",
+			"path": "script/common/util/mathUtil.js",
+			"global": true
+		},
+		"random": {
+			"type": "script",
+			"path": "script/common/util/random.js",
+			"global": true
+		},
+		"windowUtil": {
+			"type": "script",
+			"path": "script/common/util/windowUtil.js",
+			"global": true
+		},
+		"entity2D": {
+			"type": "script",
+			"path": "script/common/entity/entity2D.js",
+			"global": true
+		},
+		"textButton": {
+			"type": "script",
+			"path": "script/common/gui/textButton.js",
+			"global": true
+		},
+		"button": {
+			"type": "script",
+			"path": "script/common/gui/button.js",
 			"global": true
 		}
 	},
