@@ -1,5 +1,5 @@
-import { AudioController } from "../common/util/audioController";
 import { BaseScene } from "../common/scene/baseScene";
+import { AudioController } from "../common/util/audioController";
 import { CountdownTimer } from "../common/util/countdownTimer";
 import { Random } from "../common/util/random";
 import { GameMainParameterObject } from "./../parameterObject";
@@ -21,7 +21,7 @@ export class GameScene extends BaseScene<void> {
         });
 
         this.random = new Random(param.random || g.game.random);
-        
+
         this.onLoad.add(() => this.loadHandler(isTouched, timeLimit));
     }
 
