@@ -2,11 +2,11 @@ import { UtilityParameterObject } from "./entity2D";
 import * as GeometryUtil from "./geometryUtil";
 import { IEntity2D } from "./iEntity2D";
 
-export interface FilledRect2DParameterObject extends g.FilledRectParameterObject, UtilityParameterObject { }
+export interface FrameSprite2DParameterObject extends g.FrameSpriteParameterObject, UtilityParameterObject { }
 
-export class FilledRect2D extends g.FilledRect implements IEntity2D {
+export class FrameSprite2D extends g.FrameSprite implements IEntity2D {
 
-    constructor(param: FilledRect2DParameterObject) {
+    constructor(param: FrameSprite2DParameterObject) {
         super({
             ...param,
             anchorX: param.anchor ?? param.anchorX,
@@ -34,7 +34,6 @@ export class FilledRect2D extends g.FilledRect implements IEntity2D {
 
     translate(x: number, y: number): void;
     translate(pos: g.CommonOffset): void;
-
     translate(arg1: number | g.CommonOffset, arg2?: number): void {
         if (typeof arg1 === "number") {
             this.moveTo(arg1, arg2);
