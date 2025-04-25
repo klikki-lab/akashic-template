@@ -9,6 +9,9 @@ export interface TypedEntity2DParameterObject<T extends g.E> extends Omit<Entity
  */
 export class TypedE2D<T extends g.E> extends Entity2D {
 
+    /** 
+     * このエンティティの全子エンティティ。 子エンティティが存在しない場合、本フィールドの値は空配列である。
+     */
     override children: T[];
 
     constructor(param: TypedEntity2DParameterObject<T>) {

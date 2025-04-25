@@ -52,5 +52,5 @@ export interface IEntity2D {
      */
     translate(pos: g.CommonOffset): void;
 
-    translate(arg1: number | g.CommonOffset, arg2?: number): void
+    // translate(arg1: number | g.CommonOffset, arg2?: number): void
 }
