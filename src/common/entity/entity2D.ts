@@ -32,7 +32,7 @@ export class Entity2D extends g.E implements IEntity2D {
     /**
      * @returns 子エンティティが存在しない場合`true`、そうでなければ`false`。
      */
-    isChildrenEmpty(): boolean { return this.children?.length === 0; }
+    isEmptyChildren(): boolean { return this.children?.length === 0; }
 
     getWidth(): number { return GeometryUtil.getWidth(this); }
 

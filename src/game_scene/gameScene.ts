@@ -21,7 +21,6 @@ export class GameScene extends BaseScene<void> {
         });
 
         this.random = new Random(param.random || g.game.random);
-
         this.onLoad.add(() => this.loadHandler(isTouched, timeLimit));
     }
 

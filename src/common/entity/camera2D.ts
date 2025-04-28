@@ -1,33 +1,29 @@
+import { UtilityParameterObject } from "./entity2D";
 import * as GeometryUtil from "./geometryUtil";
 import { IEntity2D } from "./iEntity2D";
+
+export interface Camera2DParameterObject extends g.Camera2DParameterObject, UtilityParameterObject { }
 
 export class Camera2D extends g.Camera2D implements IEntity2D {
 
     public onUpdate: g.Trigger<Camera2D>;
-    private threshold: g.CommonRect;
 
-    constructor(param: g.Camera2DParameterObject, thresholdRate: g.CommonRect) {
-        super(param);
+    constructor(param: Camera2DParameterObject) {
+        super({
+            ...param,
+            anchorX: param.anchor ?? param.anchorX,
+            anchorY: param.anchor ?? param.anchorY,
+            scaleX: param.scale ?? param.scaleX,
+            scaleY: param.scale ?? param.scaleY,
+        });
 
         g.game.focusingCamera = this;
         g.game.modified();
 
         this.onUpdate = new g.Trigger();
-        this.threshold = thresholdRate;
     }
 
-    step(): void {
-        this.onUpdate.fire(this);
-    }
-
-    getThreshold(): g.CommonRect {
-        return {
-            left: this.getWidth() * this.threshold.left,
-            top: this.getHeight() * this.threshold.top,
-            right: this.getWidth() * this.threshold.right,
-            bottom: this.getHeight() * this.threshold.bottom,
-        };
-    }
+    step(): void { this.onUpdate.fire(this); }
 
     getViewport(): g.CommonRect {
         return {

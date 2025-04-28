@@ -5,9 +5,9 @@ export interface TypedEntity2DParameterObject<T extends g.E> extends Omit<Entity
 }
 
 /**
- * 子エンティティの型を定義できる`E`の拡張クラス。
+ * 子エンティティの型を定義できる `E` の拡張クラス。
  */
-export class TypedE2D<T extends g.E> extends Entity2D {
+export class TypedEntity2D<T extends g.E> extends Entity2D {
 
     /** 
      * このエンティティの全子エンティティ。 子エンティティが存在しない場合、本フィールドの値は空配列である。
@@ -26,7 +26,7 @@ export class TypedE2D<T extends g.E> extends Entity2D {
         this.children = [];
     }
 
-    override append(e: T): void {
-        super.append(e);
-    }
+    override append(e: T): void { super.append(e); }
+
+    override remove(e?: T): void { super.remove(e); }
 }

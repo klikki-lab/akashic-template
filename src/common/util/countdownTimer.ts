@@ -3,11 +3,13 @@ export class CountdownTimer {
     private _onTick?: (remainingSec: number) => void;
     private _onFinish?: () => void;
 
+    private _totalTime: number;
     private _remainingTime: number;
     private prevSec: number;
     private isStopped: boolean = false;
 
     constructor(_remainingSec: number) {
+        this._totalTime = _remainingSec;
         this._remainingTime = _remainingSec;
         this.prevSec = _remainingSec;
     }
@@ -56,6 +58,11 @@ export class CountdownTimer {
      * @returns 残り時間を取得する。
      */
     get remainingTime(): number { return this._remainingTime; }
+
+    /**
+     * @returns トータルの制限時間を取得する。
+     */
+    get totalTime(): number { return this._totalTime; }
 
     /**
      * 一秒ごとに発火するコールバックをセットする。

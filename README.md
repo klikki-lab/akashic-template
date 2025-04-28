@@ -17,4 +17,7 @@ https://akashic-games.github.io/
 `akashic init -t github:klikki-lab/akashic-template`  
 
 - 出力  
-`akashic export zip --output game.zip --nicolive`  
+`akashic export zip --output game.zip --nicolive`
+
+`akashic install @akashic-extension/akashic-timeline` 
+`akashic install @akashic-extension/akashic-label`
