@@ -98,6 +98,66 @@
 			"type": "script",
 			"path": "script/common/gui/button.js",
 			"global": true
+		},
+		"camera2D": {
+			"type": "script",
+			"path": "script/common/entity/camera2D.js",
+			"global": true
+		},
+		"frameSprite2D": {
+			"type": "script",
+			"path": "script/common/entity/frameSprite2D.js",
+			"global": true
+		},
+		"iEntity2D": {
+			"type": "script",
+			"path": "script/common/entity/iEntity2D.js",
+			"global": true
+		},
+		"typedEntity2D": {
+			"type": "script",
+			"path": "script/common/entity/typedEntity2D.js",
+			"global": true
+		},
+		"afix": {
+			"type": "script",
+			"path": "script/common/hud/afix.js",
+			"global": true
+		},
+		"scoreLabel": {
+			"type": "script",
+			"path": "script/common/hud/scoreLabel.js",
+			"global": true
+		},
+		"timeLabel": {
+			"type": "script",
+			"path": "script/common/hud/timeLabel.js",
+			"global": true
+		},
+		"sceneUtil": {
+			"type": "script",
+			"path": "script/common/scene/sceneUtil.js",
+			"global": true
+		},
+		"uiConfig": {
+			"type": "script",
+			"path": "script/common/scene/uiConfig.js",
+			"global": true
+		},
+		"arrayUtil": {
+			"type": "script",
+			"path": "script/common/util/arrayUtil.js",
+			"global": true
+		},
+		"pointEventQueue": {
+			"type": "script",
+			"path": "script/common/util/pointEventQueue.js",
+			"global": true
+		},
+		"updatable": {
+			"type": "script",
+			"path": "script/common/util/updatable.js",
+			"global": true
 		}
 	},
 	"moduleMainScripts": {

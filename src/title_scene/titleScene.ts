@@ -23,14 +23,14 @@ export class TitleScene extends BaseScene<boolean> {
     private loadHandler = (timeLimit: number): void => {
         this.countdownTimer = this.createCountdownTimer(timeLimit);
 
-        this.onPointDownCapture.add(this.pointDownHandler);
+        // this.onPointDownCapture.add(this.pointDownHandler);
         this.onUpdate.add(this.updateHandler);
     };
 
-    private pointDownHandler = (ev: g.PointDownEvent): void => {
-        this.isTouched = true;
-        this.onPointDownCapture.remove(this.pointDownHandler);
-    };
+    // private pointDownHandler = (ev: g.PointDownEvent): void => {
+    //     this.isTouched = true;
+    //     this.onPointDownCapture.remove(this.pointDownHandler);
+    // };
 
     private updateHandler = (): void | boolean => {
         if (this.isFinish) {

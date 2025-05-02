@@ -1,3 +1,6 @@
+/**
+ * `g.RandomGenerator` のラッパークラス。
+ */
 export class Random {
 
     constructor(private random: g.RandomGenerator) { }

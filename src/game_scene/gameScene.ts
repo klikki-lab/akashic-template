@@ -10,7 +10,7 @@ export class GameScene extends BaseScene<void> {
     private countdownTimer: CountdownTimer;
     private random: Random;
 
-    private isFinish = true;
+    private isFinish = false;
 
     constructor(param: GameMainParameterObject, isTouched: boolean, timeLimit: number) {
         super({
@@ -26,15 +26,36 @@ export class GameScene extends BaseScene<void> {
 
     private loadHandler = (isTouched: boolean, timeLimit: number): void => {
         this.countdownTimer = this.createCountdownTimer(timeLimit);
-        this.audioController = this.createAudioController(0.2, 0.2, !isTouched);
+        this.audioController = this.createAudioController(0.175, 0.2, !isTouched);
+
+        this.onUpdate.add(this.updateHandler);
     };
 
     private updateHandler = (): void | boolean => {
-        if (this.isFinish) {
-            this.onFinish();
-            return true;
-        }
+        // if (this.isFinish) return;
+        this.processPointEvent();
+
     };
+
+    private processPointEvent(): void {
+        if (!this.pointEventQueue.isEmpty()) {
+            const ev = this.pointEventQueue.pop();
+            switch (ev.type) {
+                case "point-down":
+                    console.log("down");
+                    break;
+                case "point-move":
+                    console.log("move");
+                    break;
+                case "point-up":
+                    console.log("up");
+                    break;
+                default:
+                    console.log("unknown");
+                    break;
+            }
+        }
+    }
 
     private createCountdownTimer(timeLimit: number): CountdownTimer {
         const countdownTimer = new CountdownTimer(timeLimit);
