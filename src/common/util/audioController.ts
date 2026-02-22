@@ -88,6 +88,13 @@ export class AudioController {
     }
 
     /**
+     * すべてのBGMを停止させる。
+     */
+    stopAllMusic(): void {
+        g.game.audio.music.stopAll();
+    }
+
+    /**
      * 指定したアセットIDのBGMのボリュームを取得する。
      * @param assetId アセットID  
      * @returns ボリューム
