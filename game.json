@@ -161,7 +161,8 @@
 		}
 	},
 	"moduleMainScripts": {
-		"@akashic-extension/akashic-timeline": "node_modules/@akashic-extension/akashic-timeline/lib/index.js"
+		"@akashic-extension/akashic-timeline": "node_modules/@akashic-extension/akashic-timeline/lib/index.js",
+		"@akashic-extension/akashic-hover-plugin": "node_modules/@akashic-extension/akashic-hover-plugin/lib/index.js"
 	},
 	"environment": {
 		"sandbox-runtime": "3",
@@ -179,6 +180,9 @@
 		"node_modules/@akashic-extension/akashic-timeline/lib/Easing.js",
 		"node_modules/@akashic-extension/akashic-timeline/lib/Timeline.js",
 		"node_modules/@akashic-extension/akashic-timeline/lib/Tween.js",
-		"node_modules/@akashic-extension/akashic-timeline/lib/index.js"
+		"node_modules/@akashic-extension/akashic-timeline/lib/index.js",
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/Converter.js",
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/HoverPlugin.js",
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/index.js"
 	]
 }

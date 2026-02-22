@@ -33,6 +33,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@akashic-extension/akashic-hover-plugin": "^3.2.3",
     "@akashic-extension/akashic-timeline": "^3.2.1"
   }
 }
