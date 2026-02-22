@@ -1,10 +1,3 @@
-# ゲーム名
-## ゲーム紹介
-
-## 操作方法
-
-## ゲーム詳細
-
 ## オープンソースライセンス
 Akashic Engine  
 https://akashic-games.github.io/  
@@ -14,11 +7,16 @@ https://akashic-games.github.io/
 
 ## Akashic commands
 ### このテンプレートをクローン  
-- `akashic init -t github:klikki-lab/akashic-template`
+`akashic init -t github:klikki-lab/akashic-template`
 ### 出力
-- `akashic export zip --output game.zip --nicolive`
+[ニコ生ゲーム 詳細](https://akashic-games.github.io/reverse-reference/v3/release/export-nicolive.html)  
+`akashic export zip --output game.zip --nicolive`  
+
+[HTML5 詳細](https://akashic-games.github.io/reverse-reference/v3/release/export-html.html)  
+`akashic export html --magnify --output ../mygame`
 ### ライブラリ
-- `akashic install @akashic-extension/akashic-timeline`
-- `akashic install @akashic-extension/akashic-label`
+`akashic install @akashic-extension/akashic-timeline`  
+`akashic install @akashic-extension/akashic-label`
 ### その他
-- `complete-audio xxx.wav`
+`npm install -g @akashic/akashic-cli`  
+`complete-audio xxx.wav`
