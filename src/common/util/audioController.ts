@@ -133,6 +133,7 @@ export class AudioController {
      * @param to フェードイン後の音量 (0 - 1)。省略時は 1 。
      * @param easing イージング関数。省略時は linear が指定される。
      * @returns AudioTransitionContext (=> {@link g.AudioTransitionContext})
+     * @throws 指定したアセットIDが未追加の場合
      */
     fadeInMusic(assetId: string, duration: number, to: number = 1, easing?: g.EasingFunction): g.AudioTransitionContext {
         return g.AudioUtil.fadeIn(g.game, this.getAudioPlayContext(assetId), duration, Math.max(0, Math.min(to, 1)), easing);
