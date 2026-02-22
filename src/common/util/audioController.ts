@@ -61,20 +61,10 @@ export class AudioController {
      */
     addMusic(asset: g.AssetAccessor, ...params: MusicParam[]): void {
         for (const param of params) {
-            const musicAudioSystem = new g.MusicAudioSystem({
-                id: param.assetId,
-                resourceFactory: g.game.resourceFactory,
-            });
-            const audioPlayContext = new g.AudioPlayContext({
-                id: param.assetId,
-                resourceFactory: g.game.resourceFactory,
-                system: musicAudioSystem,
-                systemId: param.assetId,
-                asset: asset.getAudioById(param.assetId),
-                volume: this.clamp(param.volume ?? this._musicVolume),
-            })
+            const context = g.game.audio.music.create(asset.getAudioById(param.assetId));
+            context.changeVolume(this.clamp(param.volume ?? this._musicVolume));
             this.musics[param.assetId] = {
-                context: audioPlayContext,
+                context: context,
             };
         }
     }
@@ -82,13 +72,10 @@ export class AudioController {
     /**
      * 指定したアセットIDのBGMを再生する。
      * @param assetId アセットID
-     * @returns AudioPlayContext (=> {@link g.AudioPlayContext})
      * @throws 指定したアセットIDが未追加の場合
      */
-    playMusic(assetId: string): g.AudioPlayContext {
-        const context = this.getAudioPlayContext(assetId);
-        context.play();
-        return context;
+    playMusic(assetId: string): void {
+        this.getAudioPlayContext(assetId).play();
     }
 
     /**
