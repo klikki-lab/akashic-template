@@ -3,9 +3,10 @@
  * 軽量化のため `point-move` イベントは最新のイベントしか保持しない。
  */
 export class PointEventQueue {
-
+    
     private queue: g.PointEvent[] = [];
     private latestMove: Map<number, g.PointEvent> = new Map();
+    private activePointers: Set<number> = new Set();
 
     /**
      * @param maxPointerId 最大マルチタッチ数を指定する。デフォルトは `0`。
@@ -24,10 +25,21 @@ export class PointEventQueue {
     push(event: g.PointEvent): void {
         if (event.pointerId > this.maxPointerId) return;
 
-        if (event.type === "point-move") {
-            this.latestMove.set(event.pointerId, event);
-        } else {
-            this.queue.push(event);
+        switch (event.type) {
+            case "point-down":
+                this.activePointers.add(event.pointerId);
+                this.queue.push(event);
+                break;
+            case "point-up":
+                this.activePointers.delete(event.pointerId);
+                this.latestMove.delete(event.pointerId);
+                this.queue.push(event);
+                break;
+            case "point-move":
+                if (this.activePointers.has(event.pointerId)) {
+                    this.latestMove.set(event.pointerId, event);
+                }
+                break;
         }
     }
 
@@ -39,10 +51,15 @@ export class PointEventQueue {
         if (!this.isEmptyQueue()) {
             return this.queue.shift();
         }
-        for (const [pid, event] of this.latestMove) {
-            this.latestMove.delete(pid);
-            return event;
+
+        for (const pid of this.activePointers) {
+            const event = this.latestMove.get(pid);
+            if (event) {
+                this.latestMove.delete(pid);
+                return event;
+            }
         }
+
         return undefined;
     }
 
@@ -55,9 +72,12 @@ export class PointEventQueue {
         if (!this.isEmptyQueue()) {
             return this.queue[0];
         }
-        for (const [_pid, event] of this.latestMove) {
-            return event;
+
+        for (const pid of this.activePointers) {
+            const event = this.latestMove.get(pid);
+            if (event) return event;
         }
+
         return undefined;
     }
 
@@ -67,6 +87,7 @@ export class PointEventQueue {
     clear(): void {
         this.queue.length = 0;
         this.latestMove.clear();
+        this.activePointers.clear();
     }
 
     /**
@@ -80,7 +101,7 @@ export class PointEventQueue {
      * @returns キューの長さを取得する。待ちイベント数。
      */
     length(): number {
-        return this.queue.length + + this.latestMove.size;
+        return this.queue.length + this.latestMove.size;
     }
 
     private isEmptyQueue(): boolean {
