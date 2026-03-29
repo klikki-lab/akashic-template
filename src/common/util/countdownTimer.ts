@@ -17,7 +17,7 @@ export class CountdownTimer {
     /**
      * 毎フレーム呼び出すアップデートメソッド。
      */
-    update(): void {
+    step(): void {
         if (this.isStopped) return;
 
         this._remainingTime -= 1 / g.game.fps;
