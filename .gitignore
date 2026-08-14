@@ -4,7 +4,6 @@ node_modules
 coverage
 game.zip
 game.json
-
 /src/_bootstrap.ts
 /src/main.ts
 /src/parameterObject.ts
