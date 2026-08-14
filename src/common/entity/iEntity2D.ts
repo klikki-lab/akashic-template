@@ -31,12 +31,12 @@ export interface IEntity2D {
     getLeft(): number;
 
     /**
-     * @return スケールとアンカーを考慮したセンターX座標。
+     * @return スケールを考慮したセンターX座標。
      */
     getCenterX(): number;
 
     /**
-     * @return スケールとアンカーを考慮したセンターY座標。
+     * @return スケールを考慮したセンターY座標。
      */
     getCenterY(): number;
 
