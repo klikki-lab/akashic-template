@@ -1,52 +1,16 @@
 import * as tl from "@akashic-extension/akashic-timeline";
-import { Affix } from "./afix";
+import { LabelView, LavelViewParameterObject } from "./labelView";
 
-/**
- * 表示上の最小値と最大値(カンスト値)を指定する。
- * 内部的なスコアはこれらの閾値に影響されずに増減する。
- */
-export interface ScoreThreshold {
-    /** 表示上の最小値。指定がなければ `0`。`max` 以上であれば例外を投げる。 */
-    min?: number;
-    /** 表示上の最大値(カンスト値)。指定がなければ `Number.MAX_VALUE`。 `0` または `min` 以下であれば例外を投げる。 */
-    max?: number;
-}
+export class ScoreLabel extends LabelView {
 
-export class ScoreLabel extends g.Label {
-
-    #min: number;
-    get min(): number { return this.#min; }
-
-    #max: number;
-    get max(): number { return this.#max; }
-
-    #prefix: string;
-    #suffix: string;
-    #spaces: string;
-
-    constructor(param: g.LabelParameterObject, initialScore: number = 0, private affix: Affix, threshold?: ScoreThreshold) {
+    constructor(param: LavelViewParameterObject) {
         super(param);
-
-        g.game.vars.gameState.score = initialScore;
-
-        const min = threshold?.min ?? 0;
-        const max = threshold?.max ?? Number.MAX_VALUE;
-        if (min >= max || max <= 0) throw new Error();
-
-        this.#min = min;
-        this.#max = max;
-
-        this.#prefix = this.affix.prefix ?? "";
-        this.#suffix = this.affix.suffix ?? "";
-
-        const digits = Math.floor(Math.log10(max)) + 1;
-        this.#spaces = ' '.repeat(digits - 1);
     }
 
     /**
-     * @returns スコアが表示上の最大値(カンスト)に達していれば`true`、そうでなければ`false`。
+     * @returns スコアが表示上の最大値(カンスト)に達していれば `true`、そうでなければ `false`。
      */
-    isScoreMaxed(): boolean { return g.game.vars.gameState.score >= this.#max; }
+    isScoreMaxed(): boolean { return g.game.vars.gameState.score >= this.max; }
 
     /**
      * 指定したスコアを加算する。
@@ -54,7 +18,7 @@ export class ScoreLabel extends g.Label {
      */
     addScore(score: number): void {
         g.game.vars.gameState.score += score;
-        this.setText(this.clamp(g.game.vars.gameState.score));
+        this.setValue(g.game.vars.gameState.score);
     }
 
     /**
@@ -63,7 +27,7 @@ export class ScoreLabel extends g.Label {
      */
     setScore(score: number): void {
         g.game.vars.gameState.score = score;
-        this.setText(this.clamp(g.game.vars.gameState.score));
+        this.setValue(g.game.vars.gameState.score);
     }
 
     /**
@@ -92,18 +56,10 @@ export class ScoreLabel extends g.Label {
     }
 
     private animation(timeline: tl.Timeline, score: number, duration: number): tl.Tween {
-        const clamped = this.clamp(g.game.vars.gameState.score);
+        // const clamped = g.Util.clamp(g.game.vars.gameState.score, this.min, this.max);
         return timeline.create(this)
             .every((_e: number, p: number) => {
-                this.setText(clamped - Math.floor(score * (1 - p)));
+                this.setValue(g.game.vars.gameState.score - Math.floor(score * (1 - p)));
             }, duration);
-    }
-
-    private clamp(score: number): number { return g.Util.clamp(score, this.#min, this.#max); }
-
-    private setText(score: number): void {
-        const SpacesFilledScore = (this.#spaces + score).slice(-(this.#spaces.length + 1));
-        this.text = `${this.#prefix}${SpacesFilledScore}${this.#suffix}`;
-        this.invalidate();
     }
 }
