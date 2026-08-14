@@ -21,10 +21,10 @@ export class Entity2D extends g.E implements IEntity2D {
     constructor(param: Entity2DParameterObject) {
         super({
             ...param,
-            anchorX: param.anchor ?? param.anchorX,
-            anchorY: param.anchor ?? param.anchorY,
-            scaleX: param.scale ?? param.scaleX,
-            scaleY: param.scale ?? param.scaleY,
+            anchorX: param.anchor ?? param.anchorX ?? 0,
+            anchorY: param.anchor ?? param.anchorY ?? 0,
+            scaleX: param.scale ?? param.scaleX ?? 1,
+            scaleY: param.scale ?? param.scaleY ?? 1,
         });
         this.children = [];
     }
@@ -53,9 +53,9 @@ export class Entity2D extends g.E implements IEntity2D {
     translate(x: number, y: number): void;
     translate(pos: g.CommonOffset): void;
     translate(arg1: number | g.CommonOffset, arg2?: number): void {
-        if (typeof arg1 === "number") {
+        if (typeof arg1 === "number" && typeof arg2 === "number") {
             this.moveTo(arg1, arg2);
-        } else {
+        } else if (typeof arg1 === "object") {
             this.moveTo(arg1);
         }
         this.modified();
