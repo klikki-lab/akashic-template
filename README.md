@@ -19,4 +19,5 @@ https://akashic-games.github.io/
 `akashic install @akashic-extension/akashic-label`
 ### その他
 `npm install -g @akashic/akashic-cli`  
+`npm install -g @akashic/akashic-sandbox`  
 `complete-audio xxx.wav`
