@@ -17,11 +17,13 @@ export class TitleScene extends BaseScene<boolean> {
             ],
         });
 
+        this.countdownTimer = this.createCountdownTimer(timeLimit);
+        
         this.onLoad.add(() => this.loadHandler(timeLimit));
     }
 
     private loadHandler = (timeLimit: number): void => {
-        this.countdownTimer = this.createCountdownTimer(timeLimit);
+
 
         // this.onPointDownCapture.add(this.pointDownHandler);
         this.onUpdate.add(this.updateHandler);
