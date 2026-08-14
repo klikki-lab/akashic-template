@@ -54,9 +54,9 @@ export class Camera2D extends g.Camera2D implements IEntity2D {
     translate(pos: g.CommonOffset): void;
 
     translate(arg1: number | g.CommonOffset, arg2?: number): void {
-        if (typeof arg1 === "number") {
+        if (typeof arg1 === "number" && typeof arg2 === "number") {
             this.moveTo(arg1, arg2);
-        } else {
+        } else if (typeof arg1 === "object") {
             this.moveTo(arg1);
         }
         this.modified();
