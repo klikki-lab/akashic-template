@@ -21,13 +21,13 @@ export class GameScene extends BaseScene<void> {
         });
 
         this.random = new Random(param.random || g.game.random);
+        this.countdownTimer = this.createCountdownTimer(timeLimit);
+        this.audioController = this.createAudioController(0.175, 0.2, !isTouched);
 
         this.onLoad.add(() => this.loadHandler(isTouched, timeLimit));
     }
 
     private loadHandler = (isTouched: boolean, timeLimit: number): void => {
-        this.countdownTimer = this.createCountdownTimer(timeLimit);
-        this.audioController = this.createAudioController(0.175, 0.2, !isTouched);
 
         this.onUpdate.add(this.updateHandler);
     };
