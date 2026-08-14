@@ -94,7 +94,10 @@ export class TextButton extends Button {
         }
     }
 
-    private createlabel(text: string, font: g.Font): g.Label {
+    private createlabel(text: string, font?: g.Font): g.Label {
+        if (!font)
+            throw new Error("When the first argument is a string, the third argument must be a g.Font.");
+
         return new g.Label({
             scene: this.scene,
             font: font,
