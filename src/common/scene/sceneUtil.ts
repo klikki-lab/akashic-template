@@ -5,7 +5,7 @@ export namespace SceneUtil {
     * この処理を有効にするにはtsconfigにdomを追加すること。
     */
     export function enableRightClickScreenshot(scene: g.Scene): void {
-        scene.onPointDownCapture.add(ev => {
+        scene.onPointDownCapture.add((ev: g.PointDownEvent) => {
             if (ev.button === 2) {
                 const link = document.getElementsByClassName("pure-button")[2];
                 (link as HTMLAnchorElement).click();
