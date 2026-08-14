@@ -15,22 +15,22 @@ export class ImageButton extends Button {
             const asset = scene.asset.getImageById(arg);
             this.backgorund = new Sprite2D({
                 scene: scene,
-                parent: this,
                 src: asset,
                 srcWidth: asset.width / 2,
                 width: asset.width / 2,
             });
         } else {
             this.backgorund = arg;
-            this.append(this.backgorund);
         }
 
+        this.append(this.backgorund);
         this.width = this.backgorund.width;
         this.height = this.backgorund.height;
     }
 
     protected override switchPressedState(isPressed: boolean): void {
         super.switchPressedState(isPressed);
+        
         this.backgorund.srcX = isPressed ? this.width : 0;
         this.backgorund.invalidate();
     }
