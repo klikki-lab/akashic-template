@@ -51,6 +51,4 @@ export interface IEntity2D {
      * @param pos 移動させる位置。
      */
     translate(pos: g.CommonOffset): void;
-
-    // translate(arg1: number | g.CommonOffset, arg2?: number): void
 }

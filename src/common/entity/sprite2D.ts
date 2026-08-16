@@ -34,11 +34,6 @@ export class Sprite2D extends g.Sprite {
     translate(x: number, y: number): void;
     translate(pos: g.CommonOffset): void;
     translate(arg1: number | g.CommonOffset, arg2?: number): void {
-        if (typeof arg1 === "number") {
-            this.moveTo(arg1, arg2);
-        } else {
-            this.moveTo(arg1);
-        }
-        this.modified();
+        GeometryUtil.translate(this, arg1, arg2);
     }
 }

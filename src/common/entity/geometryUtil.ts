@@ -13,3 +13,12 @@ export function getTop(e: g.Object2D): number { return e.y - getHeight(e) * (e.a
 export function getRight(e: g.Object2D): number { return getLeft(e) + getWidth(e); }
 
 export function getBottom(e: g.Object2D): number { return getTop(e) + getHeight(e); }
+
+export function translate(e: g.E | g.Camera2D, arg1: number | g.CommonOffset, arg2?: number): void {
+    if (typeof arg1 === "number" && typeof arg2 === "number") {
+        e.moveTo(arg1, arg2);
+    } else if (typeof arg1 === "object") {
+        e.moveTo(arg1);
+    }
+    e.modified();
+}
