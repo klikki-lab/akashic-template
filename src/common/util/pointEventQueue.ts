@@ -3,10 +3,12 @@
  * 軽量化のため `point-move` イベントは最新のイベントしか保持しない。
  */
 export class PointEventQueue {
-    
+
     private queue: g.PointEvent[] = [];
-    private latestMove: Map<number, g.PointEvent> = new Map();
-    private activePointers: Set<number> = new Set();
+    private latestMove: { [key: number]: g.PointEvent } = {};
+    private activePointers: { [key: number]: boolean } = {};
+    private activePointerIds: number[] = [];
+    private latestMoveCount: number = 0;
 
     /**
      * @param maxPointerId 最大マルチタッチ数を指定する。デフォルトは `0`。
@@ -27,17 +29,27 @@ export class PointEventQueue {
 
         switch (event.type) {
             case "point-down":
-                this.activePointers.add(event.pointerId);
+                if (!this.activePointers[event.pointerId]) {
+                    this.activePointers[event.pointerId] = true;
+                    this.activePointerIds.push(event.pointerId);
+                }
                 this.queue.push(event);
                 break;
             case "point-up":
-                this.activePointers.delete(event.pointerId);
-                this.latestMove.delete(event.pointerId);
+                delete this.activePointers[event.pointerId];
+                this.removePointerId(event.pointerId);
+                if (this.latestMove[event.pointerId] !== undefined) {
+                    delete this.latestMove[event.pointerId];
+                    this.latestMoveCount--;
+                }
                 this.queue.push(event);
                 break;
             case "point-move":
-                if (this.activePointers.has(event.pointerId)) {
-                    this.latestMove.set(event.pointerId, event);
+                if (this.activePointers[event.pointerId]) {
+                    if (this.latestMove[event.pointerId] === undefined) {
+                        this.latestMoveCount++;
+                    }
+                    this.latestMove[event.pointerId] = event;
                 }
                 break;
         }
@@ -52,10 +64,12 @@ export class PointEventQueue {
             return this.queue.shift();
         }
 
-        for (const pid of this.activePointers) {
-            const event = this.latestMove.get(pid);
-            if (event) {
-                this.latestMove.delete(pid);
+        for (var i = 0; i < this.activePointerIds.length; i++) {
+            var pid = this.activePointerIds[i];
+            var event = this.latestMove[pid];
+            if (event !== undefined) {
+                delete this.latestMove[pid];
+                this.latestMoveCount--;
                 return event;
             }
         }
@@ -73,9 +87,10 @@ export class PointEventQueue {
             return this.queue[0];
         }
 
-        for (const pid of this.activePointers) {
-            const event = this.latestMove.get(pid);
-            if (event) return event;
+        for (var i = 0; i < this.activePointerIds.length; i++) {
+            var pid = this.activePointerIds[i];
+            var event = this.latestMove[pid];
+            if (event !== undefined) return event;
         }
 
         return undefined;
@@ -86,25 +101,34 @@ export class PointEventQueue {
      */
     clear(): void {
         this.queue.length = 0;
-        this.latestMove.clear();
-        this.activePointers.clear();
+        this.latestMove = {};
+        this.activePointers = {};
+        this.activePointerIds.length = 0;
+        this.latestMoveCount = 0;
     }
 
     /**
      * @returns キューが空なら `true`、そうでなければ `false`。
      */
     isEmpty(): boolean {
-        return this.isEmptyQueue() && this.latestMove.size === 0;
+        return this.isEmptyQueue() && this.latestMoveCount === 0;
     }
 
     /**
      * @returns キューの長さを取得する。待ちイベント数。
      */
     length(): number {
-        return this.queue.length + this.latestMove.size;
+        return this.queue.length + this.latestMoveCount;
     }
 
     private isEmptyQueue(): boolean {
         return this.queue.length === 0;
+    }
+
+    private removePointerId(pid: number): void {
+        var idx = this.activePointerIds.indexOf(pid);
+        if (idx !== -1) {
+            this.activePointerIds.splice(idx, 1);
+        }
     }
 }

@@ -12,7 +12,11 @@ export namespace ArrayUtil {
      * @returns `value` を `count` 個持つ配列
      */
     export function rep<T>(value: T, count: number): T[] {
-        return Array(count).fill(value);
+        var result: T[] = [];
+        for (var i = 0; i < count; i++) {
+            result.push(value);
+        }
+        return result;
     }
 
     /**
@@ -22,7 +26,11 @@ export namespace ArrayUtil {
      * @returns `func` の戻り値を `count` 個持つ配列
      */
     export function repWithGenerator<T>(count: number, func: (i: number) => T): T[] {
-        return Array.from({ length: count }, (_, i) => func(i));
+        var result: T[] = [];
+        for (var i = 0; i < count; i++) {
+            result.push(func(i));
+        }
+        return result;
     }
 
     /**
@@ -32,8 +40,11 @@ export namespace ArrayUtil {
      * @returns `start` から `end` までの整数を要素とする配列
      */
     export function range(start: number, end: number): number[] {
-        const len = end - start + 1;
-        return Array.from({ length: len }, (_, i) => start + i);
+        var result: number[] = [];
+        for (var i = start; i <= end; i++) {
+            result.push(i);
+        }
+        return result;
     }
 
     /**
@@ -46,7 +57,9 @@ export namespace ArrayUtil {
         const arr = array.slice();
         for (let i = arr.length - 1; i > 0; i--) {
             const j = random.generateInt(i + 1);
-            [arr[i], arr[j]] = [arr[j], arr[i]];
+            const temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
         return arr;
     }

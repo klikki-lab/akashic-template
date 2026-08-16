@@ -56,13 +56,16 @@ export class AudioController {
 
     /**
      * BGMを追加する。
-     * @param asset AssetAccessor (=> {@link g.AssetAccessor})
-     * @param params BGMパラメータ (=>{@link MusicParam})。アセットIDとボリュームを指定する。ボリューム指定がなければコンストラクタのデフォルト値になる。
+     * @param asset {@link g.AssetAccessor}
+     * @param params BGMパラメータ ({@link MusicParam})。アセットIDとボリュームを指定する。ボリューム指定がなければコンストラクタのデフォルト値になる。
      */
     addMusic(asset: g.AssetAccessor, ...params: MusicParam[]): void {
-        for (const param of params) {
+        for (let i = 0; i < params.length; i++) {
+            const param = params[i];
             const context = g.game.audio.music.create(asset.getAudioById(param.assetId));
-            context.changeVolume(this.clamp(param.volume ?? this._musicVolume));
+            const volume = param.volume !== undefined ? param.volume : this._musicVolume;
+            context.changeVolume(this.clamp(volume));
+
             this.musics[param.assetId] = {
                 context: context,
             };
@@ -145,11 +148,13 @@ export class AudioController {
      * @param params SEパラメータ (=>{@link SoundParam})。アセットIDとボリューム、インターバルを指定する。ボリューム指定がなければコンストラクタのデフォルト値に、インターバル指定がなければ 1 が指定される。
      */
     addSound(asset: g.AssetAccessor, ...params: SoundParam[]): void {
-        for (const param of params) {
-            const interval = param.interval ?? AudioController.DEFAULT_SOUND_INTERVAL;
+        for (var i = 0; i < params.length; i++) {
+            var param = params[i];
+            var interval = param.interval !== undefined ? param.interval : AudioController.DEFAULT_SOUND_INTERVAL;
+            var volume = param.volume !== undefined ? param.volume : this._soundVolume;
             this.sounds[param.assetId] = {
                 audio: asset.getAudioById(param.assetId),
-                volume: this.clamp(param.volume ?? this._soundVolume),
+                volume: this.clamp(volume),
                 interval: Math.max(AudioController.DEFAULT_SOUND_INTERVAL, interval),
                 age: g.game.age,
             };
