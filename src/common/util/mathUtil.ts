@@ -35,7 +35,7 @@ export namespace MathUtil {
      */
     export function getAngle(pos1: g.CommonOffset, pos2: g.CommonOffset): number;
     export function getAngle(arg1: number | g.CommonOffset, arg2: number | g.CommonOffset, arg3?: number, arg4?: number): number {
-        if (typeof arg1 === "number" && typeof arg2 === "number") {
+        if (typeof arg1 === "number" && typeof arg2 === "number" && typeof arg3 === "number" && typeof arg4 === "number") {
             const dx = arg3 - arg1;
             const dy = arg4 - arg2;
             const radians = Math.atan2(dy, dx);
@@ -66,7 +66,7 @@ export namespace MathUtil {
      */
     export function getDistance(pos1: g.CommonOffset, pos2: g.CommonOffset): number;
     export function getDistance(arg1: number | g.CommonOffset, arg2: number | g.CommonOffset, arg3?: number, arg4?: number): number {
-        if (typeof arg1 === "number" && typeof arg2 === "number") {
+        if (typeof arg1 === "number" && typeof arg2 === "number" && typeof arg3 === "number" && typeof arg4 === "number") {
             const dx = arg3 - arg1;
             const dy = arg4 - arg2;
             return Math.sqrt(dx * dx + dy * dy);
